@@ -1,9 +1,11 @@
-import express, {Express, Request, Response, Router} from "express";
+import express, { Router } from "express";
+import * as api from "../controllers/api-handlers";
+
 
 const router: Router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
-    res.json({message: 'hey'});
-});
+router.get("/", api.home);
+
+router.get("/random-word", api.randomWordApi);
 
 export = router;
