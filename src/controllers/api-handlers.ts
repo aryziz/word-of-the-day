@@ -23,7 +23,7 @@ export const randomWordApi = async (req: Request, res: Response): Promise<void> 
     try {
         const response: AxiosResponse = await client.get('/v1/randomword', config);
         const foundWord: randomWord[] = response.data.word;
-        res.status(200).json({ "word": foundWord[0] });
+        res.status(200).render('home', { word: foundWord[0] });
     } catch (err) {
         console.log(err);
     }
