@@ -1,25 +1,15 @@
 import fs from "fs";
-import path from "path";
 import apiRoutes from "./routes/api";
 // External
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import { engine as expressHandlebars } from "express-handlebars";
-
 dotenv.config();
 
 const app: Express = express();
 
 const port: number | string = process.env.PORT || 3000;
-
-app.engine("handlebars", expressHandlebars({
-    defaultLayout: "main",
-    extname: ".handlebars"
-}));
-app.set("views", path.join(__dirname, 'views'));
-app.set("view engine", "handlebars");
 
 // Middleware
 app.use(express.static(__dirname + "/public"));

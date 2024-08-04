@@ -6,6 +6,6 @@ const router: Router = express.Router();
 
 router.get("/", api.home);
 
-router.get("/random-word", api.randomWordApi);
+router.get("/random-word", api.wordAndDefinitionApi);
 
 export = router;
