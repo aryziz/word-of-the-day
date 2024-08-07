@@ -13,10 +13,16 @@ export const wordAndDefinitionApi = async (req: Request, res: Response): Promise
      * @param res - The Express response object.
      * @returns A promise that resolves when the response is sent.
      */
-    const wordResponse: RandomWord = await randomWordApi();
-    const { word } = wordResponse;
 
-    const definitionResponse: WordDefinition = await wordDefinitionApi(word);
+    try {
+        const wordResponse: RandomWord = await randomWordApi();
+        const { word } = wordResponse;
 
-    res.status(200).json({ definitionResponse });
+        const definitionResponse: WordDefinition = await wordDefinitionApi(word);
+
+        res.status(200).json({ definitionResponse });
+    } catch (err) {
+        console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
+        res.status(500).json({ error: "Failed to fetch word or definition" });
+    }
 }

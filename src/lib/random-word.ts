@@ -5,8 +5,8 @@ export interface RandomWord {
 }
 
 export interface WordDefinition {
-    word: string,
-    definition: string[],
+    word: string;
+    definition: string[];
 }
 
 export const randomWordApi = async (): Promise<RandomWord> => {
