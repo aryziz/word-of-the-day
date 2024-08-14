@@ -10,4 +10,6 @@ router.get("/random-word", api.wordAndDefinitionApi);
 
 router.get("/latest-word", api.getLatestWordApi);
 
+router.get("/send-new-word", api.createWord);
+
 export = router;
