@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import apiDB from "../db/api";
 import { randomWordApi, wordDefinitionApi, WordDefinition, RandomWord } from "../lib/random-word";
 
 export const home = async (req: Request, res: Response): Promise<void> => {
@@ -24,5 +25,19 @@ export const wordAndDefinitionApi = async (req: Request, res: Response): Promise
     } catch (err) {
         console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
         res.status(500).json({ error: "Failed to fetch word or definition" });
+    }
+}
+
+export const getLatestWordApi = async (req: Request, res: Response) => {
+    try {
+        const newestWord = await apiDB.getLatestWord();
+        if (newestWord) {
+            res.status(200).json(newestWord);
+        } else {
+            res.status(404).json({ message: "No words found" });
+        }
+    } catch (err) {
+        console.error(`[server]: Error fetching newest word: ${err}`);
+        res.status(500).json({ message: "Server error" });
     }
 }

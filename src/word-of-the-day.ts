@@ -1,5 +1,6 @@
 import fs from "fs";
 import apiRoutes from "./routes/api";
+import connectDB from "./db/connect";
 // External
 import express, { Express } from "express";
 import dotenv from "dotenv";
@@ -31,10 +32,22 @@ switch (app.get("env")) {
         break;
     }
 }
-app.use(morgan("dev"));
 
-app.listen(port, () => {
-    console.log(
-        `[server]: Listening on port ${port} in ${app.get("env")} mode...`
-    );
-});
+const startServer = async () => {
+    try {
+        await connectDB(process.env.MONGO_URL as string)
+        app.listen(port, () => {
+            console.log(
+                `[server]: Listening on port ${port} in ${app.get("env")} mode...`
+            );
+        });
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+if (require.main == module) {
+    startServer();
+} else {
+    module.exports = startServer;
+}

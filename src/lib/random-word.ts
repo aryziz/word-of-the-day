@@ -1,5 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance } from "axios";
 
+// TODO: Make this into a middleware
+
 export interface RandomWord {
     word: string;
 }
