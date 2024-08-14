@@ -1,7 +1,7 @@
 import request from "supertest";
 import express, { Application } from 'express';
 import dotenv from "dotenv";
-import { wordAndDefinitionApi } from "../../src/controllers/api-handlers";
+import { wordAndDefinitionApi } from "../../src/controllers/wordController";
 
 dotenv.config();
 
