@@ -6,6 +6,8 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import "./jobs/wordCron";
+
 dotenv.config();
 
 const app: Express = express();

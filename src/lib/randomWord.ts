@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance } from "axios";
+import Word from "../models/word";
 
 // TODO: Make this into a middleware
 
@@ -58,7 +59,7 @@ export const wordDefinitionApi = async (word: string): Promise<WordDefinition> =
         const firstEntry = data[0];
 
         if (typeof firstEntry === "string") {
-            console.log(`[server]: Word (${word}) not found, choosing another word`)
+            console.log(`[server]: Word (${word}) not found in the chosen directory, picking another word`);
             // Choose a random word from the list and run wordDefinition again
             const randomIndex: number = Math.floor(Math.random() * data.length);
             const suggestedWord = data[randomIndex];
@@ -70,5 +71,22 @@ export const wordDefinitionApi = async (word: string): Promise<WordDefinition> =
     } catch (err) {
         console.error(`[server]: Error fetching random word (${word}): ${err}`);
         throw new Error("Server Error");
+    }
+}
+
+export const createNewWord = async () => {
+    try {
+        const wordResponse: RandomWord = await randomWordApi();
+        const { word } = wordResponse;
+
+        const definitionResponse: WordDefinition = await wordDefinitionApi(word);
+
+        const newWord = new Word({ word: definitionResponse.word, definitions: definitionResponse.definition });
+        const savedWord = await newWord.save();
+
+        return savedWord;
+    } catch (err) {
+        console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import apiDB from "../db/api";
-import { randomWordApi, wordDefinitionApi, WordDefinition, RandomWord } from "../lib/random-word";
-import Word from "../models/word";
+import { randomWordApi, wordDefinitionApi, WordDefinition, RandomWord } from "../lib/randomWord";
 
 export const home = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ message: "hey" });
@@ -40,22 +39,5 @@ export const getLatestWordApi = async (req: Request, res: Response) => {
     } catch (err) {
         console.error(`[server]: Error fetching newest word: ${err}`);
         res.status(500).json({ message: "Server error" });
-    }
-}
-
-export const createWord = async (req: Request, res: Response) => {
-    try {
-        const wordResponse: RandomWord = await randomWordApi();
-        const { word } = wordResponse;
-
-        const definitionResponse: WordDefinition = await wordDefinitionApi(word);
-
-        const newWord = new Word({ word: definitionResponse.word, definitions: definitionResponse.definition });
-        const savedWord = await newWord.save();
-
-        res.status(200).json({ savedWord });
-    } catch (err) {
-        console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
-        res.status(500).json({ error: "Failed to fetch word or definition" });
     }
 }
