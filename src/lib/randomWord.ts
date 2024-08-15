@@ -75,6 +75,11 @@ export const wordDefinitionApi = async (word: string): Promise<WordDefinition> =
 }
 
 export const createNewWord = async () => {
+    /**
+     * Merges the two functions above to return a random word with definitions
+     * @returns The document with saved word, and its definitions
+     * @throws Error if something goes wrong in-between the functions
+     */
     try {
         const wordResponse: RandomWord = await randomWordApi();
         const { word } = wordResponse;

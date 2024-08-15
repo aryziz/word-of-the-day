@@ -29,6 +29,12 @@ export const wordAndDefinitionApi = async (req: Request, res: Response): Promise
 }
 
 export const getLatestWordApi = async (req: Request, res: Response) => {
+    /**
+     * Serves the latest word with its definitions in JSON format
+     * @param req - The Express request object.
+     * @param res - The Express response object.
+     * @returns A promise that resolves when the response is sent.
+     */
     try {
         const newestWord = await apiDB.getLatestWord();
         if (newestWord) {

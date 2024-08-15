@@ -7,8 +7,8 @@ cron.schedule("* * * * *", async () => {
     const sentWord = await createNewWord();
 
     if (sentWord == null) {
-        console.error("[server]: Something went wrong with createNewWord");
+        console.error("[server]: Something went wrong with the job (createNewWord)");
     } else {
-        console.log("[server]: Job completed");
+        console.log("[server]: Job (createNewWord) completed");
     }
 });
