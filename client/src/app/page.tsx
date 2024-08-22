@@ -1,3 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import WordDefinition from "./home/WordDefinition";
+
 export default function Home() {
-  return <h1>Hey!</h1>;
+  return <WordDefinition />;
 }
