@@ -5,6 +5,7 @@ import connectDB from "./db/connect";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 import bodyParser from "body-parser";
 import "./jobs/wordCron";
 
@@ -23,7 +24,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "GET");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
-})
+});
+app.use(cors());
 app.use("/api/v1", apiRoutes);
 
 switch (app.get("env")) {
