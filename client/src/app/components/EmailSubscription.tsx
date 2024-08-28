@@ -4,8 +4,8 @@
 import { useState } from "react";
 
 export default function EmailSubscription() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [status, setStatus] = useState<{ message: string; type: string }>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,16 +20,25 @@ export default function EmailSubscription() {
       });
 
       if (response.ok) {
-        setStatus("Thank you for subscribing!");
+        setStatus({ message: "Thank you for subscribing!", type: "success" });
         setEmail("");
       } else {
-        setStatus("Failed to subscribe. Please try again later.");
+        setStatus({
+          message: "Failed to subscribe. Please try again later.",
+          type: "error",
+        });
       }
     } catch (error) {
       console.error("Error subscribing:", error);
-      setStatus("An error occurred. Please try again later.");
+      setStatus({
+        message: "An Error occurred. Please try again later.",
+        type: "error",
+      });
     }
   };
+
+  const statusColor: string =
+    status?.type === "success" ? "text-green-800" : "text-red-800";
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg mt-8">
@@ -54,7 +63,9 @@ export default function EmailSubscription() {
           Subscribe
         </button>
       </form>
-      {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
+      {status && (
+        <p className={`mt-4 text-center ${statusColor}`}>{status.message}</p>
+      )}
     </div>
   );
 }
