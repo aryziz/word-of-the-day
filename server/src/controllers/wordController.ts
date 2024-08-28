@@ -47,3 +47,8 @@ export const getLatestWordApi = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Server error" });
     }
 }
+
+export const postEmail = async (req: Request, res: Response) => {
+    console.log(`[server]: Email for registration: ${req.body.email}`);
+    res.status(201).send({ ok: true, email: req.body.email });
+}
