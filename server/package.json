@@ -6,9 +6,10 @@
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
-    "start": "node src/word-of-the-day.ts",
+    "start": "node dist/src/word-of-the-day.ts",
     "dev": "nodemon src/word-of-the-day.ts",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "prod": "export NODE_ENV='production' ts-node src/word-of-the-day.ts"
   },
   "author": "",
   "license": "ISC",
@@ -18,20 +19,24 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "errorhandler": "^1.5.1",
     "express": "^4.19.2",
     "mongoose": "^8.5.2",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
+    "node-notifier": "^10.0.1",
     "nodemailer": "^6.9.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/cors": "^2.8.17",
+    "@types/errorhandler": "^1.5.3",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.0.0",
     "@types/node-cron": "^3.0.11",
+    "@types/node-notifier": "^8.0.5",
     "@types/nodemailer": "^6.4.15",
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.0.0",

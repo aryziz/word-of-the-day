@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
+import errorhandler from "errorhandler";
+import errorNotification from "./lib/errorNotification";
 import "./jobs/wordCron";
 import "./jobs/emailCron";
 
@@ -32,6 +34,7 @@ app.use("/api/v1", apiRoutes);
 switch (app.get("env")) {
     case "development":
         app.use(morgan("dev"));
+        app.use(errorhandler({ log: errorNotification }));
         break;
 
     case "production": {
@@ -39,6 +42,7 @@ switch (app.get("env")) {
             __dirname + "/log/access.log",
             { flags: "a" }
         );
+        app.use(errorhandler());
         app.use(morgan("combined", { stream }));
         break;
     }

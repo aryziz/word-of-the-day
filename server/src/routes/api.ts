@@ -1,15 +1,16 @@
 import express, { Router } from "express";
-import * as api from "../controllers/wordController";
+import * as wordController from "../controllers/wordController";
+import * as emailController from "../controllers/emailController";
 
 
 const router: Router = express.Router();
 
-router.get("/", api.home);
+router.get("/", wordController.home);
 
-router.get("/random-word", api.wordAndDefinitionApi);
+router.get("/random-word", wordController.wordAndDefinitionApi);
 
-router.get("/latest-word", api.getLatestWordApi);
+router.get("/latest-word", wordController.getLatestWordApi);
 
-router.post("/subscribe", api.postEmail);
+router.post("/subscribe", emailController.postEmail);
 
 export = router;

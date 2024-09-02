@@ -16,9 +16,9 @@ const transporter = nodemailer.createTransport({
     }
 } as SMTPTransport.Options);
 
-cron.schedule("* * * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
     try {
-        console.log("[server]: Sending batch emails..");
+        console.log("[server]: Sending newsletter emails..");
         const subscriptions: IEmail[] = await apiDB.getAllActiveEmails();
 
         subscriptions.forEach(async (subscription: IEmail) => {
@@ -31,8 +31,8 @@ cron.schedule("* * * * *", async () => {
             await transporter.sendMail(mailOptions);
             console.log(`[server]: Sending to ${subscription.email}..`);
         });
-        console.log("[server]: Sending emails completed!");
+
     } catch (error) {
-        console.error(`Error: ${error}`);
+        console.error(`[server]: Error: ${error}`);
     }
 });
