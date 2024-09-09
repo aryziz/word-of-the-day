@@ -2,10 +2,20 @@ import { Request, Response } from "express";
 import EmailSubscription from "../models/email";
 import apiDB from "../db/dataService";
 
+/**
+ * Checks if object is a mongoDB error
+ * @param error A possible error object
+ * @returns If the object passed in is a MongoDB error
+ */
 function isMongoError(error: unknown): error is { code: number } {
     return typeof error === 'object' && error !== null && 'code' in error;
 }
 
+/**
+ * Handles email subscriptions
+ * @param req Express Request object
+ * @param res Express Response object
+ */
 export const postEmail = async (req: Request, res: Response) => {
     console.log(`[server]: Registration of email ${req.body.email} started..`);
     const { email } = req.body;

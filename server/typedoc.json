@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["src/**/*.ts"],
+    "out": "./docs",
+    "name": "Word of The Day",
+    "excludePrivate": true,
+    "excludeNotDocumented": true,
+    "exclude": ["**/*.spec.ts"] // Excluding test files if present
+}

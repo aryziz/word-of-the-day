@@ -1,6 +1,6 @@
 import fs from "fs";
 import apiRoutes from "./routes/api";
-import connectDB from "./db/db";
+import { connectDB } from "./db/db";
 import "./jobs/wordCron";
 import "./jobs/emailCron";
 // External

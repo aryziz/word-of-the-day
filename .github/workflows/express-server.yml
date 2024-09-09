@@ -1,0 +1,36 @@
+name: Upload Documentation
+
+on:
+    push:
+        branches: [main]
+        
+        paths:
+            - 'server/**'
+
+    pull_request:
+        branches:
+            - main
+        paths:
+            - 'server/**'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: server
+        steps:
+        -   name: Check out repository
+            uses: actions/checkout@v2
+
+        -   name: Set up Node.js
+            uses: actions/setup-node@v2
+            with:
+                node-version: '20.10'
+            
+        -   name: Install dependencies
+            run: npm install
+        
+        -   name: Generate documentation with TypeDoc
+            run: npx typedoc
+
