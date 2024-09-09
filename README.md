@@ -1,3 +1,3 @@
 ## What is WOTD?
 
-We will *find out.*
+We will *find* out.
