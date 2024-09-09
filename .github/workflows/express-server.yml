@@ -6,6 +6,7 @@ on:
         
         paths:
             - 'server/**'
+            - '.github/**'
 
     pull_request:
         branches:
