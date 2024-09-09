@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import EmailSubscription from "../models/email";
-import apiDB from "../db/api";
+import apiDB from "../db/dataService";
 
 function isMongoError(error: unknown): error is { code: number } {
     return typeof error === 'object' && error !== null && 'code' in error;

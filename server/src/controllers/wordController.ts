@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import apiDB from "../db/api";
+import apiDB from "../db/dataService";
 import { randomWordApi, wordDefinitionApi, WordDefinition, RandomWord } from "../lib/randomWord";
 
 

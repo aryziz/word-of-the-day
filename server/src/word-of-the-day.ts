@@ -1,6 +1,8 @@
 import fs from "fs";
 import apiRoutes from "./routes/api";
-import connectDB from "./db/connect";
+import connectDB from "./db/db";
+import "./jobs/wordCron";
+import "./jobs/emailCron";
 // External
 import express, { Express } from "express";
 import dotenv from "dotenv";
@@ -8,9 +10,6 @@ import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 import errorhandler from "errorhandler";
-import errorNotification from "./lib/errorNotification";
-import "./jobs/wordCron";
-import "./jobs/emailCron";
 
 dotenv.config();
 
@@ -34,7 +33,6 @@ app.use("/api/v1", apiRoutes);
 switch (app.get("env")) {
     case "development":
         app.use(morgan("dev"));
-        app.use(errorhandler({ log: errorNotification }));
         break;
 
     case "production": {

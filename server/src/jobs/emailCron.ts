@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import apiDB from "../db/api";
+import apiDB from "../db/dataService";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import { IEmail } from "../models/email";
