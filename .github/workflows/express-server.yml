@@ -34,3 +34,12 @@ jobs:
         -   name: Generate documentation with TypeDoc
             run: npx typedoc
 
+        -   name: Commit and Push Documentation
+            run: |
+                git checkout docs
+                git config user.name 'Github Actions'
+                git config user.email 'actions@github.com'
+                git add docs/
+                git commit -m "Updated documentation" -a || echo "No changes to commit"
+                git push origin docs
+
