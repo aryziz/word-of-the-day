@@ -34,15 +34,17 @@ jobs:
         -   name: Install dependencies
             run: npm install
 
-        -   name: Checkout docs branch
+        -   name: Checkout docs branch safely
             run: |
-                git fetch origin docs:docs
-                git checkout docs
+                git fetch origin docs:docs-temp
+                git checkout docs-temp
+                git branch -D docs || true
+                git checkout -b docs
         
         -   name: Merge changes from main
             run: |
-                git fetch origin main:main
-                git merge -X ours main --no-edit
+                git fetch origin main
+                git merge -X ours FETCH_HEAD --no-edit
         
         -   name: Generate documentation with TypeDoc
             run: npx typedoc
