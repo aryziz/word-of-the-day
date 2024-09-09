@@ -36,12 +36,13 @@ jobs:
 
         -   name: Checkout docs branch
             run: |
+                git fetch origin docs:docs
                 git checkout docs
-                git pull origin docs
         
         -   name: Merge changes from main
             run: |
-                git pull origin main
+                git fetch origin main:main
+                git merge -X ours main --no-edit
         
         -   name: Generate documentation with TypeDoc
             run: npx typedoc
