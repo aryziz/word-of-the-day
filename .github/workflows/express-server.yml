@@ -44,7 +44,7 @@ jobs:
         -   name: Merge changes from main
             run: |
                 git fetch origin main
-                git merge -X ours FETCH_HEAD --no-edit
+                git merge --allow-unrelated-histories -X ours FETCH_HEAD --no-edit
         
         -   name: Generate documentation with TypeDoc
             run: npx typedoc
