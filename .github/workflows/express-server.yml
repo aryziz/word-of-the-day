@@ -34,12 +34,14 @@ jobs:
         -   name: Install dependencies
             run: npm install
 
-        -   name: Checkout docs branch safely
+        -   name: Checkout docs branch safely & setting git config
             run: |
                 git fetch origin docs:docs-temp
                 git checkout docs-temp
                 git branch -D docs || true
                 git checkout -b docs
+                git config user.name 'Github Actions'
+                git config user.email 'actions@github.com'
         
         -   name: Merge changes from main
             run: |
@@ -51,8 +53,6 @@ jobs:
 
         -   name: Commit and Push Documentation
             run: |
-                git config user.name 'Github Actions'
-                git config user.email 'actions@github.com'
                 git add docs/
                 git commit -m "Updated documentation" -a || echo "No changes to commit"
                 git push origin docs
