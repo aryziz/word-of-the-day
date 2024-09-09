@@ -45,4 +45,5 @@ jobs:
                 git add docs/
                 git commit -m "Updated documentation" -a || echo "No changes to commit"
                 git push origin docs
-
+permissions:
+    contents: write
