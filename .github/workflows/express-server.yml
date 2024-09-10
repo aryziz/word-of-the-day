@@ -36,4 +36,10 @@ jobs:
 
         -   name: Run tests
             run: npm test
+            env:
+                RANDOM_WORD_KEY: ${{secrets.RANDOM_WORD_KEY}}
+                MERRIAM_KEY: ${{secrets.MERRIAM_KEY}}
+                MONGO_URL: ${{secrets.MONGO_URL}}
+                PORT: ${{secrets.PORT}}
+
             
