@@ -1,4 +1,4 @@
-name: Upload Documentation
+name: Run All Existing Tests
 
 on:
     push:
@@ -29,32 +29,11 @@ jobs:
         -   name: Set up Node.js
             uses: actions/setup-node@v2
             with:
-                node-version: 18
+                node-version: 20
             
         -   name: Install dependencies
             run: npm install
 
-        -   name: Checkout docs branch safely & setting git config
-            run: |
-                git fetch origin docs:docs-temp
-                git checkout docs-temp
-                git branch -D docs || true
-                git checkout -b docs
-                git config user.name 'Github Actions'
-                git config user.email 'actions@github.com'
-        
-        -   name: Merge changes from main
-            run: |
-                git fetch origin main
-                git merge --allow-unrelated-histories -X ours FETCH_HEAD --no-edit
-        
-        -   name: Generate documentation with TypeDoc
-            run: npx typedoc
-
-        -   name: Commit and Push Documentation
-            run: |
-                git add docs/
-                git commit -m "Updated documentation" -a || echo "No changes to commit"
-                git push origin docs
-permissions:
-    contents: write
+        -   name: Run tests
+            run: npm test
+            
