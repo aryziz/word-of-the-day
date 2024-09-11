@@ -8,17 +8,18 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    host: process.env.BREVO_HOST,
-    port: process.env.BREVO_PORT,
+    host: process.env.MAILJET_HOST,
+    port: process.env.MAIL_PORT,
     auth: {
-        user: process.env.BREVO_USER,
-        pass: process.env.BREVO_PASS
+        user: process.env.MAILJET_KEY,
+        pass: process.env.MAILJET_SECRET_KEY
     }
 } as SMTPTransport.Options);
 
-cron.schedule("0 0 * * *", async () => {
+cron.schedule("* * * * *", async () => {
     try {
         console.log("[server]: Sending newsletter emails..");
+        console.log("-".repeat(40));
         const subscriptions: IEmail[] = await apiDB.getAllActiveEmails();
 
         subscriptions.forEach(async (subscription: IEmail) => {
@@ -29,7 +30,7 @@ cron.schedule("0 0 * * *", async () => {
                 text: "Check out wotd.io to keep learning 🔥"
             }
             await transporter.sendMail(mailOptions);
-            console.log(`[server]: Sending to ${subscription.email}..`);
+            console.log(`[server]: Mail to: ${subscription.email}`);
         });
 
     } catch (error) {
