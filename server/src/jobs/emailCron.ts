@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 cron.schedule("* * * * *", async () => {
     try {
-        console.log("[server]: Sending newsletter emails..");
+        console.log("[server] Sending newsletter emails..");
         console.log("-".repeat(40));
         const subscriptions: IEmail[] = await apiDB.getAllActiveEmails();
 
@@ -30,10 +30,10 @@ cron.schedule("* * * * *", async () => {
                 text: "Check out wotd.io to keep learning 🔥"
             }
             await transporter.sendMail(mailOptions);
-            console.log(`[server]: Mail to: ${subscription.email}`);
+            console.log(`[server] Mail to: ${subscription.email}`);
         });
 
     } catch (error) {
-        console.error(`[server]: Error: ${error}`);
+        console.error(`[server] Error: ${error}`);
     }
 });

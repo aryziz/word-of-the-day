@@ -23,7 +23,7 @@ export const wordAndDefinitionApi = async (req: Request, res: Response): Promise
 
         res.status(200).json({ definitionResponse });
     } catch (err) {
-        console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
+        console.error(`[server] Error in wordAndDefinitionApi: ${err}`);
         res.status(500).json({ error: "Failed to fetch word or definition" });
     }
 }
@@ -43,7 +43,7 @@ export const getLatestWordApi = async (req: Request, res: Response) => {
             res.status(404).json({ message: "No words found" });
         }
     } catch (err) {
-        console.error(`[server]: Error fetching newest word: ${err}`);
+        console.error(`[server] Error fetching newest word: ${err}`);
         res.status(500).json({ message: "Server error" });
     }
 }

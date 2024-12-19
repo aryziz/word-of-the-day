@@ -17,7 +17,7 @@ function isMongoError(error: unknown): error is { code: number } {
  * @param res Express Response object
  */
 export const postEmail = async (req: Request, res: Response) => {
-    console.log(`[server]: Registration of email ${req.body.email} started..`);
+    console.log(`[server] Registration of email ${req.body.email} started..`);
     const { email } = req.body;
 
     const numberOfEmails: number = await apiDB.getNumberOfEmails();
@@ -32,7 +32,7 @@ export const postEmail = async (req: Request, res: Response) => {
         res.status(201).json({ message: "Subscription successful" });
     } catch (error) {
         if (isMongoError(error) && error.code === 11000) {
-            console.error("[server]: This email is already registered");
+            console.error("[server] This email is already registered");
             res.status(400).json({ message: "This email is already registered" });
         } else {
             res.status(500).json({ error: error });

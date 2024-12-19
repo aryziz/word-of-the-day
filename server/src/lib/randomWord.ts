@@ -30,7 +30,7 @@ export const randomWordApi = async (): Promise<RandomWord> => {
         const response: AxiosResponse = await client.get('/v1/randomword', config);
         return { word: response.data.word[0] };
     } catch (err) {
-        console.error(`[server]: Error fetching random word: ${err}`);
+        console.error(`[server] Error fetching random word: ${err}`);
         throw new Error("Server Error");
     }
 }
@@ -53,13 +53,13 @@ export const wordDefinitionApi = async (word: string): Promise<WordDefinition> =
         const data = response.data;
 
         if (data.length === 0) {
-            throw new Error(`[server]: No suggestions available for the word ${word}`);
+            throw new Error(`[server] No suggestions available for the word ${word}`);
         }
 
         const firstEntry = data[0];
 
         if (typeof firstEntry === "string") {
-            console.log(`[server]: Word (${word}) not found in the chosen directory, picking another word`);
+            console.log(`[server] Word (${word}) not found in the chosen directory, picking another word`);
             // Choose a random word from the list and run wordDefinition again
             const randomIndex: number = Math.floor(Math.random() * data.length);
             const suggestedWord = data[randomIndex];
@@ -69,7 +69,7 @@ export const wordDefinitionApi = async (word: string): Promise<WordDefinition> =
         const wordId: string = firstEntry.meta.id
         return { word: wordId, definition: firstEntry.shortdef }
     } catch (err) {
-        console.error(`[server]: Error fetching random word (${word}): ${err}`);
+        console.error(`[server] Error fetching random word (${word}): ${err}`);
         throw new Error("Server Error");
     }
 }
@@ -91,7 +91,7 @@ export const createNewWord = async () => {
 
         return savedWord;
     } catch (err) {
-        console.error(`[server]: Error in wordAndDefinitionApi: ${err}`);
+        console.error(`[server] Error in wordAndDefinitionApi: ${err}`);
         return null;
     }
 }
